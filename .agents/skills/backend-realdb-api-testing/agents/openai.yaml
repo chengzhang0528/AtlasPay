@@ -1,0 +1,7 @@
+interface:
+  display_name: "Backend Real Database Testing"
+  short_description: "Run assertion-backed real database API tests"
+  default_prompt: "Use $backend-realdb-api-testing to run assertion-backed backend API tests against an isolated real database without exposing secrets."
+
+policy:
+  allow_implicit_invocation: true

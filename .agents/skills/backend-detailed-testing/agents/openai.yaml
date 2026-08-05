@@ -1,0 +1,7 @@
+interface:
+  display_name: "Backend Detailed Testing"
+  short_description: "Plan and run layered backend verification"
+  default_prompt: "Use $backend-detailed-testing to plan and execute unit, integration, contract, and real-environment backend testing for this change."
+
+policy:
+  allow_implicit_invocation: true

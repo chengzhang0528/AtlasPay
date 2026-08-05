@@ -1,0 +1,7 @@
+interface:
+  display_name: "Replicate Workspace"
+  short_description: "Initialize a document-driven control plane and skills"
+  default_prompt: "Use $replicate-workspace to migrate only verified governance and stable skills into a target workspace while keeping the reference read-only."
+
+policy:
+  allow_implicit_invocation: true

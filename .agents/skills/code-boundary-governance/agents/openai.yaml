@@ -1,0 +1,7 @@
+interface:
+  display_name: "Code Boundary Governance"
+  short_description: "Review layered code and dependency boundaries"
+  default_prompt: "Use $code-boundary-governance to review repository, manager, application service, controller, DI, data-access, and provider responsibilities before changing backend code."
+
+policy:
+  allow_implicit_invocation: true

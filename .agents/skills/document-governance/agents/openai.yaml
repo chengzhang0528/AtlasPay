@@ -1,0 +1,7 @@
+interface:
+  display_name: "Document Governance"
+  short_description: "Clean and align workspace documentation"
+  default_prompt: "Use $document-governance to align document ownership, keep TASK_CONTROL current, and remove stale process material."
+
+policy:
+  allow_implicit_invocation: true

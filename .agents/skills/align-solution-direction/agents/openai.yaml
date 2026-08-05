@@ -1,0 +1,7 @@
+interface:
+  display_name: "Solution Direction Review"
+  short_description: "Calibrate solution direction before planning"
+  default_prompt: "Use $align-solution-direction to pass settled direction silently, correct unnecessary scope, or stop only for a material decision."
+
+policy:
+  allow_implicit_invocation: true

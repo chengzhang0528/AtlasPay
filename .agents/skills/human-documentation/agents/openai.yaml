@@ -1,0 +1,7 @@
+interface:
+  display_name: "人类文档"
+  short_description: "编写真实可执行、便于验收的中文开发文档与任务指南页"
+  default_prompt: "使用 $human-documentation 从单一入口和真实运行契约出发，编写可直接执行并判断结果的中文指南。"
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Git Closeout"
+  short_description: "Commit and push one verified work item"
+  default_prompt: "Use $git-closeout after an independent work item passes validation to commit and push only its exact files through the child-process runner."
+
+policy:
+  allow_implicit_invocation: true

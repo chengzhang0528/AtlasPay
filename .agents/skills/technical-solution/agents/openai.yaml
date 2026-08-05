@@ -1,0 +1,7 @@
+interface:
+  display_name: "Technical Solution"
+  short_description: "Create coding-ready technical solutions"
+  default_prompt: "Use $technical-solution to produce a coding-ready technical solution with explicit scope, constraints, success criteria, stop conditions, and verification."
+
+policy:
+  allow_implicit_invocation: true
