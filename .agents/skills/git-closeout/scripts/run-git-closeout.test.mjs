@@ -156,16 +156,20 @@ test("rejects remote-ahead history before staging", (t) => {
   assert.equal(git(fixture.repo, ["diff", "--cached", "--name-only"]), "");
 });
 
-test("rejects directories and common secret paths", (t) => {
+test("allows .env.example while rejecting directories and common secret paths", (t) => {
   const fixture = createRepository();
   t.after(() => fs.rmSync(fixture.root, { recursive: true, force: true }));
   write(path.join(fixture.repo, ".env"), "TOKEN=secret\n");
+  write(path.join(fixture.repo, ".env.example"), "TOKEN=<placeholder>\n");
   const directory = run(fixture.repo, ["--mode", "check", "--path", "."]);
   const secret = run(fixture.repo, ["--mode", "check", "--path", ".env"]);
+  const example = run(fixture.repo, ["--mode", "check", "--path", ".env.example"]);
   assert.equal(directory.status, 2);
   assert.equal(directory.json.code, "unsafe_path");
   assert.equal(secret.status, 2);
   assert.equal(secret.json.code, "unsafe_path");
+  assert.equal(example.status, 0, example.stderr || example.stdout);
+  assert.equal(example.json.status, "ready");
 });
 
 test("redacts credentials and token query values from Git failures", (t) => {

@@ -45,8 +45,9 @@ test("rejects an invalid task status", (t) => {
   const fixture = createFixture(t);
   const taskPath = path.join(fixture, "文档", "TASK_CONTROL.md");
   const taskText = fs.readFileSync(taskPath, "utf8");
-  assert.match(taskText, /\| Ready \|/);
-  fs.writeFileSync(taskPath, taskText.replace("| Ready |", "| Done |"), "utf8");
+  assert.match(taskText, /^## 当前队列$/m);
+  const invalidTask = "| TEST-INVALID-STATUS | Done | workspace | validation fixture | `AGENTS.md` |";
+  fs.writeFileSync(taskPath, taskText.replace(/(## 当前队列\r?\n)/, `$1\n${invalidTask}\n`), "utf8");
 
   const result = runCheck(fixture);
   assert.notEqual(result.status, 0);

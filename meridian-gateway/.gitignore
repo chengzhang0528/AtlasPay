@@ -1,0 +1,11 @@
+/.local/
+/bin/
+/coverage.out
+*.db
+*.db-shm
+*.db-wal
+*.log
+*.exe
+.env
+.env.*
+!.env.example

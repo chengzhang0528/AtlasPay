@@ -4,7 +4,7 @@ Status: Active
 Kind: TaskControl
 Scope: AtlasPay workspace / 未完成任务
 Owner: Codex
-Updated: 2026-08-05
+Updated: 2026-08-07
 Depends On:
 - ../AGENTS.md
 
@@ -12,10 +12,7 @@ Depends On:
 
 ## 当前队列
 
-| ID | 状态 | 范围 | 下一可验证结果 | 入口 |
-|---|---|---|---|---|
-| ATLASPAY-PROJECT-BASELINE-001 | Ready | workspace | 从实际提交的源码与构建入口识别首个项目 ID、源码根、消费者和定向验证命令，再建立项目级入口；不得预设技术栈。 | `AGENTS.md` |
-| MERIDIAN-GATEWAY-MVP-001 | InProgress | meridian-gateway / V0.1-V0.3 | 单进程服务通过定向测试、构建和本机 UI/API smoke；真实支付宝自动支付仅以沙箱或正式凭据验收。 | `文档/工作空间/推进中/CP-0001-Meridian-Gateway-MVP.md` |
+当前无未完成任务。
 
 ## 候选积压
 
@@ -23,7 +20,10 @@ Depends On:
 
 ## 长期触发
 
-当前无长期触发项。
+| ID | 状态 | 触发条件 | 下一可验证结果 | 入口 |
+|---|---|---|---|---|
+| MERIDIAN-ALIPAY-REAL-ACCEPTANCE | Backlog | 用户准备配合真实支付宝测试 | 使用 git-ignored 凭据完成人工付款、异步通知、主动查询与退款闭环验收。 | `文档/项目/项目_meridian-gateway/Meridian_Gateway_CurrentDesign.md` |
+| MERIDIAN-DOCKER-PERSISTENCE-ACCEPTANCE | Backlog | 本机或 CI 具备可用 Docker 环境 | 使用持久卷完成容器启动、重启与 SQLite 数据保留 smoke。 | `文档/项目/项目_meridian-gateway/Meridian_Gateway_CurrentDesign.md` |
 
 ## 维护规则
 

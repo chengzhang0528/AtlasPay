@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>支付结果</title><link rel="stylesheet" href="/assets/styles.css"></head>
+{{with .payment}}
+<body data-status-url="{{$.status_url}}" data-method="{{.Method}}" data-amount="{{.AmountMinor}}" data-currency="{{.Currency}}">
+  <div class="checkout-shell">
+    <header class="checkout-head">Meridian Gateway</header>
+    <main class="checkout-main">
+      <section class="checkout-summary"><div class="checkout-title"><span id="status" class="pill {{.Status}}">{{.Status}}</span><h1>支付结果</h1><div id="amount" class="amount"></div><p id="status-text">{{.Status}}</p><p id="status-guidance" class="muted">最终状态以支付宝已验签通知或主动查询为准。</p><div class="mono">{{.ID}}</div></div></section>
+    </main>
+    <footer class="checkout-foot">Meridian Gateway</footer>
+  </div>
+  <script src="/assets/checkout.js" defer></script>
+</body>
+{{end}}
+</html>

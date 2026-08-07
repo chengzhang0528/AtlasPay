@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Meridian Gateway</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body data-base-url="{{.base_url}}">
+  <main id="login" class="login">
+    <form id="login-form" class="login-panel">
+      <div class="login-mark">M</div>
+      <h1>Meridian Gateway</h1>
+      <p class="muted">系统管理员与商户管理控制台</p>
+      <label>管理令牌<input id="admin-token" type="password" value="{{.admin_token}}" autocomplete="current-password" required></label>
+      <button class="primary" type="submit" style="width:100%;margin-top:16px">进入控制台</button>
+    </form>
+  </main>
+
+  <div id="app" class="hidden">
+    <header class="topbar">
+      <div class="brand"><strong>Meridian Gateway</strong><span>支付运营控制台</span></div>
+      <div class="topbar-actions"><span id="access-scope" class="scope-label"></span><span id="service-status" class="status-dot" title="服务正常"></span><button id="logout" type="button">退出</button></div>
+    </header>
+    <div class="shell">
+      <aside class="sidebar">
+        <nav class="nav">
+          <button class="active" data-view="overview" type="button">概览</button>
+          <button data-view="payments" type="button">订单</button>
+          <button data-view="events" type="button">事件</button>
+          <button data-view="settings" type="button">配置</button>
+        </nav>
+      </aside>
+      <main class="main">
+        <div class="page-head">
+          <div><h1 id="view-title">运营概览</h1><p class="muted" id="view-subtitle">实时订单与投递状态</p></div>
+          <div class="toolbar">
+            <select id="merchant-select" class="merchant-picker" aria-label="当前商户"></select>
+            <button id="refresh" type="button">刷新</button>
+            <button id="new-payment" class="primary" type="button">创建订单</button>
+          </div>
+        </div>
+
+        <section id="view-overview" class="view">
+          <div class="band"><div class="band-inner"><div class="metrics">
+            <div class="metric"><div class="label">订单总数</div><div class="value" id="metric-payments">0</div></div>
+            <div class="metric"><div class="label">已支付</div><div class="value" id="metric-paid">0</div></div>
+            <div class="metric"><div class="label">待确认</div><div class="value" id="metric-pending">0</div></div>
+            <div class="metric"><div class="label">投递异常</div><div class="value" id="metric-failed">0</div></div>
+          </div></div></div>
+          <section class="panel"><div class="panel-head"><h2>最近订单</h2><button data-view-jump="payments" type="button">查看全部</button></div><div id="overview-payments" class="table-wrap"></div></section>
+        </section>
+
+        <section id="view-payments" class="view hidden">
+          <section class="panel"><div class="panel-head"><h2>支付订单</h2><select id="status-filter" aria-label="订单状态" style="width:170px"><option value="">全部状态</option><option value="open">待支付</option><option value="paid">已支付</option><option value="closed">已关闭</option><option value="failed">失败</option><option value="refund">退款相关</option></select></div><div id="payments-table" class="table-wrap"></div></section>
+          <section class="panel"><div class="panel-head"><h2>费用记录</h2></div><div id="fee-table" class="table-wrap"></div></section>
+          <section class="panel"><div class="panel-head"><h2>退款记录</h2></div><div id="refund-table" class="table-wrap"></div></section>
+        </section>
+
+        <section id="view-events" class="view hidden">
+          <section class="panel"><div class="panel-head"><h2>Webhook 投递</h2></div><div id="delivery-table" class="table-wrap"></div></section>
+          <section class="panel"><div class="panel-head"><h2>操作审计</h2></div><div id="audit-table" class="table-wrap"></div></section>
+        </section>
+
+        <section id="view-settings" class="view hidden">
+          <section class="panel"><div class="panel-head"><h2>商户与应用</h2><div class="toolbar"><button id="rotate-merchant-token" type="button">商户登录令牌</button><button id="add-merchant" type="button">新建商户</button><button id="add-application" type="button">新建应用</button></div></div><div id="application-table" class="table-wrap"></div></section>
+          <section class="panel"><div class="panel-head"><h2>静态收款码</h2><button id="add-static-code" type="button">上传收款码</button></div><div id="static-code-table" class="table-wrap"></div></section>
+          <section class="panel"><div class="panel-head"><h2>支付宝账户</h2><button id="configure-alipay" type="button">配置</button></div><div id="alipay-state" class="panel-body muted">未配置</div></section>
+          <section class="panel"><div class="panel-head"><h2>对账</h2><a id="reconciliation" class="button" href="#">导出 CSV</a></div></section>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="form-dialog"><div class="dialog-head"><h2 id="dialog-title"></h2><button class="icon-button" data-close type="button" aria-label="关闭">×</button></div><form id="dialog-form" class="form"></form></dialog>
+  <dialog id="secret-dialog"><div class="dialog-head"><h2 id="secret-title">一次性凭证</h2><button class="icon-button" data-close type="button" aria-label="关闭">×</button></div><div class="form"><div id="secret-content" class="secret-box mono"></div><div class="form-actions"><button data-close type="button">关闭</button></div></div></dialog>
+  <div id="toast" class="toast hidden"></div>
+  <script src="/assets/admin.js" defer></script>
+</body>
+</html>

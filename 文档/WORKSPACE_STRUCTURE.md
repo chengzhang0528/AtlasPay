@@ -28,8 +28,8 @@ Depends On:
 - `TASK_CONTROL.md` -> `TaskControl`
 - `WORKSPACE_STRUCTURE.md` -> `StructureContract`
 - `工作流/` -> `WorkflowContract,Workflow`
+- `项目/项目_meridian-gateway/` -> `AgentEntry,ProductContract,CurrentDesign,Decision,Runbook,Material`
 - `工作空间/` -> `ProductContract,CurrentDesign,Decision,Runbook,Material`
-- `工作空间/推进中/` -> `ChangePlan,Issue`
 - `工作空间/归档/` -> `Archive`
 
 ## 文档状态协议

@@ -77,7 +77,8 @@ function normalizeOwnedPath(repo, value) {
   const blockedSegments = ["/node_modules/", "/dist/", "/bin/", "/obj/", "/.venv/", "/target/", "/.git/"];
   const blockedNames = new Set([".env", "id_rsa", "id_ed25519"]);
   const blockedExtensions = [".log", ".pem", ".key", ".pfx", ".p12"];
-  if (blockedSegments.some((segment) => lower.includes(segment)) || blockedNames.has(base) || base.startsWith(".env.") || blockedExtensions.some((extension) => base.endsWith(extension))) {
+  const blockedEnvVariant = base.startsWith(".env.") && base !== ".env.example";
+  if (blockedSegments.some((segment) => lower.includes(segment)) || blockedNames.has(base) || blockedEnvVariant || blockedExtensions.some((extension) => base.endsWith(extension))) {
     throw new CloseoutError("unsafe_path", "Owned path matches a blocked secret or generated-output class.", { path: relative });
   }
   if (fs.existsSync(resolved) && fs.statSync(resolved).isDirectory()) throw new CloseoutError("directory_path_rejected", "Pass changed files individually; directories are not accepted.", { path: relative });

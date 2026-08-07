@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Meridian 收银台</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+{{with .payment}}
+<body data-status-url="{{$.status_url}}" data-method="{{.Method}}" data-amount="{{.AmountMinor}}" data-currency="{{.Currency}}">
+  <div class="checkout-shell">
+    <header class="checkout-head">Meridian Gateway</header>
+    <main class="checkout-main">
+      <section class="checkout-summary">
+        <div class="checkout-title">
+          <span id="status" class="pill {{.Status}}">{{.Status}}</span>
+          <h1>{{.Subject}}</h1>
+          <div id="amount" class="amount"></div>
+          <div class="muted mono">{{.MerchantOrderID}}</div>
+        </div>
+        <div class="checkout-body {{if or (eq .Method "alipay_page") (eq .Method "alipay_wap")}}checkout-body-redirect{{end}}">
+          {{if $.payable}}
+          {{if eq .Method "static_alipay"}}
+          <div class="qr-frame" data-payment-action><img src="{{$.static_code_url}}" alt="支付宝静态收款码"></div>
+          {{else if eq .Method "alipay_qr"}}
+          <div class="qr-frame" data-payment-action><img src="{{$.qr_url}}" alt="支付宝动态二维码"></div>
+          {{end}}
+          {{end}}
+          <div class="checkout-details">
+            <div class="detail-row"><span class="muted">支付方式</span><strong>{{.Method}}</strong></div>
+            <div class="detail-row"><span class="muted">订单状态</span><strong id="status-text">{{.Status}}</strong></div>
+            <div class="detail-row"><span class="muted">有效期至</span><strong>{{if .ExpiresAt}}{{.ExpiresAt.Format "2006-01-02 15:04:05"}}{{else}}-{{end}}</strong></div>
+            <p id="status-guidance" class="muted">{{if eq .Status "paid"}}商户已确认到账。{{else if eq .Status "closed"}}订单已关闭。{{else if eq .Status "failed"}}支付未完成，请联系商户。{{else if eq .Status "refunding"}}退款处理中。{{else if eq .Status "partially_refunded"}}订单已部分退款。{{else if eq .Status "refunded"}}订单已退款。{{else if not $.payable}}订单已过期，正在关闭。{{else if eq .Method "static_alipay"}}等待商户操作员核对到账。{{else}}等待支付宝确认支付结果。{{end}}</p>
+            {{with $.alipay_form}}
+            <form class="checkout-pay-form" data-payment-action method="post" action="{{$.redirect_url}}">
+              {{range .Fields}}<input type="hidden" name="{{.Name}}" value="{{.Value}}">{{end}}
+              <button class="primary" type="submit">前往支付宝</button>
+            </form>
+            {{end}}
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="checkout-foot">支付结果以商户确认或支付宝已验签通知为准</footer>
+  </div>
+  <script src="/assets/checkout.js" defer></script>
+</body>
+{{end}}
+</html>

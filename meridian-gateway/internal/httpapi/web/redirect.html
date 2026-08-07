@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>正在前往支付宝</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <main class="checkout-shell">
+    <section class="checkout-main">
+      <div class="checkout-summary">
+        <div class="checkout-title">
+          <h1>正在前往支付宝</h1>
+          <form id="alipay-redirect" method="post" action="{{.redirect_url}}">
+            {{range .form.Fields}}<input type="hidden" name="{{.Name}}" value="{{.Value}}">{{end}}
+            <button class="button primary" type="submit">前往支付宝</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="/assets/redirect.js" defer></script>
+</body>
+</html>

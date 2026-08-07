@@ -1,0 +1,20 @@
+services:
+  meridian-gateway:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      MERIDIAN_ADDRESS: ":8080"
+      MERIDIAN_BASE_URL: "http://127.0.0.1:8080"
+      MERIDIAN_DATABASE_PATH: "/data/meridian.db"
+      MERIDIAN_MASTER_KEY: "${MERIDIAN_MASTER_KEY}"
+      MERIDIAN_ADMIN_TOKEN: "${MERIDIAN_ADMIN_TOKEN}"
+      MERIDIAN_ADMIN_LOCAL_ONLY: "false"
+    volumes:
+      - meridian-data:/data
+    restart: unless-stopped
+
+volumes:
+  meridian-data:

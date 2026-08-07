@@ -1,0 +1,34 @@
+{
+  "openapi": "3.1.0",
+  "info": {"title": "Meridian Gateway API", "version": "0.1.0"},
+  "servers": [{"url": "/"}],
+  "components": {
+    "securitySchemes": {"ApiKey": {"type": "http", "scheme": "bearer"}},
+    "schemas": {
+      "PaymentRequest": {
+        "type": "object",
+        "required": ["merchant_order_id", "method", "amount_minor", "currency", "subject"],
+        "properties": {
+          "merchant_order_id": {"type": "string", "maxLength": 96},
+          "method": {"enum": ["static_alipay", "alipay_qr", "alipay_page", "alipay_wap"]},
+          "amount_minor": {"type": "integer", "minimum": 1},
+          "currency": {"const": "CNY"},
+          "subject": {"type": "string", "maxLength": 128},
+          "static_code_id": {"type": "string"},
+          "return_url": {"type": "string", "format": "uri"},
+          "expires_in_seconds": {"type": "integer", "minimum": 60, "maximum": 86400}
+        }
+      }
+    }
+  },
+  "paths": {
+    "/v1/payments": {
+      "post": {"summary": "Create an idempotent payment", "security": [{"ApiKey": []}], "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/PaymentRequest"}}}}, "responses": {"201": {"description": "Created"}, "200": {"description": "Existing idempotent payment"}, "409": {"description": "Idempotency conflict"}}}
+    },
+    "/v1/payments/{id}": {"get": {"summary": "Get a payment", "security": [{"ApiKey": []}], "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "string"}}], "responses": {"200": {"description": "Payment"}, "404": {"description": "Not found"}}}},
+    "/v1/payments/{id}/query": {"post": {"summary": "Query channel state", "security": [{"ApiKey": []}], "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "string"}}], "responses": {"200": {"description": "Payment"}}}},
+    "/v1/payments/{id}/close": {"post": {"summary": "Close a pending payment", "security": [{"ApiKey": []}], "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "string"}}], "responses": {"200": {"description": "Closed"}}}},
+    "/v1/refunds": {"post": {"summary": "Refund a paid Alipay order", "security": [{"ApiKey": []}], "responses": {"201": {"description": "Refund"}}}},
+    "/v1/webhooks/alipay": {"post": {"summary": "Receive signed Alipay notifications", "responses": {"200": {"description": "success"}, "400": {"description": "failure"}}}}
+  }
+}
