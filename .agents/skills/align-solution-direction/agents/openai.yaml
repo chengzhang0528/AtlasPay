@@ -1,7 +1,7 @@
 interface:
   display_name: "Solution Direction Review"
-  short_description: "Calibrate solution direction before planning"
-  default_prompt: "Use $align-solution-direction to pass settled direction silently, correct unnecessary scope, or stop only for a material decision."
+  short_description: "Check premises, preserve intent, and bound claims by evidence"
+  default_prompt: "Use $align-solution-direction to pass settled direction silently, correct unnecessary scope, or stop only for a material decision. Check user and agent premises independently, correct errors with evidence, and surface consequential omissions, costs, and reasoning bias."
 
 policy:
   allow_implicit_invocation: true

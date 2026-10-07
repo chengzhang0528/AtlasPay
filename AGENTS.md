@@ -3,7 +3,7 @@
 Status: Active
 Scope: AtlasPay workspace
 Owner: Codex
-Updated: 2026-08-05
+Updated: 2026-10-07
 Depends On:
 - none
 
@@ -46,6 +46,7 @@ Depends On:
 
 ## 工程与文档门禁
 
+- 对用户与智能体自己的关键前提保持独立判断；按[方向对齐方法](.agents/skills/align-solution-direction/SKILL.md)核实事实与推理，直接说明有依据的错误、遗漏及其影响，不把目标、偏好或假设当作事实。
 - 调用函数、组件、脚本或 API 前先查源码、类型、AGENTS 或正式文档；不凭经验编造契约。
 - 公共包、DTO、数据库、权限和跨项目契约变更前识别全部消费者；保持最小改动，不夹带重构或无关格式化。
 - 改动后运行与影响范围匹配的测试、构建、lint、smoke 或 doctor；已选择验证失败不得报告完成。
