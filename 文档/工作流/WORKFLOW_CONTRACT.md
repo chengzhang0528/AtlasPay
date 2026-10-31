@@ -4,7 +4,7 @@ Status: Active
 Kind: WorkflowContract
 Scope: AtlasPay workspace / 智能体治理
 Owner: Codex
-Updated: 2026-08-05
+Updated: 2026-10-31
 Depends On:
 - ../WORKSPACE_STRUCTURE.md
 
@@ -46,6 +46,10 @@ Depends On:
 | `ACT-ARCHIVE-RESULT` | 已登记结果影响后续选择 | 任务、结果、长期入口、最小验证 | 一行完成事实 | 即时或代码可重建结果不归档 |
 | `ACT-VALIDATE-DOCS` | 正式文档或入口变化 | 当前文档树与结构契约 | 治理检查结果 | 失败不得收口 |
 | `ACT-REPORT-RESULT` | 当前回合结束 | 变更、状态和验证证据 | 可核验最终汇报 | 不省略未运行验证及原因 |
+
+## 公共输出要求
+
+每次工作流结束，按 [WF-0004](WF-0004-任务收口.md) 分为“通过项”和“不通过项”两段，报告本次任务类型、验收结果、关键证据及独立的 Git 状态。不通过项须写明所属服务或项目、卡点、对本次目标的影响和推进建议。未被用户要求、未建立的测试或部署不列为未执行阶段；分项汇报不改变本仓的任务授权、必要验收及活动清理规则。
 
 ## 公共门禁
 
